@@ -1,0 +1,254 @@
+$white: #fff;
+$brown: #4D2319;
+$dirt: #220F0B;
+$green: #30862D;
+$red: #C2000A;
+$yellow: #E8AD17;
+
+.wrapper {
+  height: 300px;
+  width: 100%;
+  position: absolute;
+  transform: scale(0.5, 0.5);
+  z-index: 2;
+  filter: drop-shadow(0 0 3px #333);
+  .plant {
+    $height: 150px;
+    height: $height;
+    width: 6px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 90px;
+    margin: auto;
+    background: $green;
+    z-index: 1;
+    transform-origin: center bottom;
+    animation: lean 3s .5s infinite;
+    .leaf {
+      &__one {
+        $size: 30px;
+        height: $size;
+        width: $size;
+        background: $green;
+        position: relative;
+        top: 10px;
+        left: 6px;
+        border-top-left-radius: 100%;
+        border-top-right-radius: 100%;
+        border-bottom-left-radius: 100%;
+        transform: rotateZ(-67.5deg);
+        z-index: -2;
+      }
+      &__two {
+        $size: 26px;
+        height: $size;
+        width: $size;
+        background: $green;
+        position: relative;
+        top: 12px;
+        right: $size;
+        border-top-left-radius: 100%;
+        border-top-right-radius: 100%;
+        border-bottom-right-radius: 100%;
+        transform: rotateZ(67.5deg);
+      }
+      &__three {
+        $size: 24px;
+        height: $size;
+        width: $size;
+        background: $green;
+        position: relative;
+        top: 22px;
+        left: 6px;
+        border-top-left-radius: 100%;
+        border-top-right-radius: 100%;
+        border-bottom-left-radius: 100%;
+        transform: rotateZ(-67.5deg);
+      }
+    }
+    .flower {
+      $dia: 80px;
+      height: $dia;
+      width: $dia;
+      position: absolute;
+      top: -$dia;
+      left: -($dia/2);
+      animation: rotate 3s .5s infinite;
+      &::before { // These are the thingies around the flower
+        content: "";
+        $size: 40px;
+        height: $size;
+        width: $size;
+        position: absolute;
+        top: -30px;
+        left: 20px;
+        background: $red;
+        border-radius: 100%;
+        z-index: -1;
+        box-shadow: -37px 15px $red, -47px 54px $red, -26px 89px $red, 15px 93px $red, 43px 63px $red, 36px 21px $red;
+      }
+      .head {
+        $dia: 80px;
+        height: $dia;
+        width: $dia;
+        position: absolute;
+        border-radius: 100%;
+        background: $yellow;
+        box-shadow: 0 0 3px #333;
+        z-index: 10;
+        .face {
+          height: $dia/3;
+          width: $dia/3;
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: $dia/8;
+          margin: auto;
+          border: 4px transparent solid;
+          border-bottom: 4px black solid;
+          border-right: 4px black solid;
+          border-radius: 100%;
+          transform: rotate(45deg);
+          z-index: 10;
+          &::before, // These are the cheeks
+          &::after {
+            content: "";
+            $size: 10px;
+            height: $size;
+            width: $size;
+            position: absolute;
+            top: -10px;
+            background: black;
+            border-radius: 100%;
+          }
+          &::before {
+            top: 8px;
+            left: -16px;
+          }
+          &::after {
+            top: -16px;
+            right: 8px;
+          }
+        }
+      }
+    }
+  }
+  .pot {
+    $size: 120px;
+    height: $size/1.5;
+    width: $size/2;
+    background: $brown;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    .top {
+      height: 20px;
+      width: $size;
+      position: absolute;
+      left: -$size/4;
+      background: darken($brown, 2.5%);
+      z-index: 2;
+      // The dirt
+      &::after {
+        content: "";
+        $height: 14px; // Height of the dirt
+        height: $height;
+        width: $size;
+        position: absolute;
+        top: -$height;
+        left: 0;
+        border: 0;
+        border-top: $height $dirt solid;
+        border-radius: 100%;
+      }
+    }
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      border-color: $brown;
+      border-top-width: $size/3;
+      border-right-width: $size/8;
+      border-bottom-width: $size/3;
+      border-left-width: $size/8;
+      border-style: solid;
+      border-bottom-color: transparent;
+    }
+    &::before {
+      left: -$size/4;
+      border-left-color: transparent;
+    }
+    &::after {
+      right: -$size/4;
+      border-right-color: transparent;
+    }
+  }
+  .text {
+    width: 360px;
+    position: absolute;
+    top: 360px;
+    left: -30px;
+    right: 0;
+    bottom: auto;
+    font-size: 48px;
+    text-align: center;
+    font-family: "Indie Flower";
+  }
+}
+
+.whitespace {
+  height: 40px;
+  position: absolute;
+  bottom: -40px;
+}
+
+@keyframes lean {
+  0% {
+    transform: rotate(0deg);
+  }
+  12.5% {
+    transform: rotate(-22.5deg);
+  }
+  25% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  62.5% {
+    transform: rotate(22.5deg);
+  }
+  75% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  12.5% {
+    transform: rotate(22.5deg);
+  }
+  25% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  62.5% {
+    transform: rotate(-22.5deg);
+  }
+  75% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}

@@ -1,0 +1,31 @@
+.works {
+  width: 750px;
+  margin: auto;
+  background: #fff;
+}
+
+.tabs-component-tabs {
+  display: flex;
+  border-bottom: 1px solid #eee;
+  padding: 0;
+  margin-bottom: 0;
+  li {
+    width: 50%;
+    list-style: none;
+    padding: 15px 0;
+    text-align: center;
+
+    a {
+      display: block;
+      text-decoration: none;
+      color: #111;
+    }
+    &.is-active {
+      a {
+        color: #41b883;
+      }
+    }
+  }
+}
+
+

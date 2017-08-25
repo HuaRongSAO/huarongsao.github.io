@@ -1,0 +1,433 @@
+// generic transform
+@mixin transform($transforms) {
+  -moz-transform: $transforms;
+  -o-transform: $transforms;
+  -ms-transform: $transforms;
+  -webkit-transform: $transforms;
+  transform: $transforms;
+}
+
+// rotate
+@mixin rotate($deg) {
+  @include transform(rotate(#{$deg}deg));
+}
+
+@mixin rotateY($deg) {
+  @include transform(rotateY(#{$deg}deg));
+}
+
+@mixin rotateXY($x, $y) {
+  @include transform(rotate(#{$x}deg) rotateY(#{$y}deg));
+}
+
+// scale
+@mixin scale($scale) {
+  @include transform(scale($scale));
+}
+
+// translate
+@mixin translate($x, $y) {
+  @include transform(translate($x, $y));
+}
+
+// skew
+@mixin skew($x, $y) {
+  @include transform(skew(#{$x}deg, #{$y}deg));
+}
+
+//transform origin
+@mixin transform-origin($origin) {
+  moz-transform-origin: $origin;
+  -o-transform-origin: $origin;
+  -ms-transform-origin: $origin;
+  -webkit-transform-origin: $origin;
+  transform-origin: $origin;
+}
+
+@mixin animation($animate...) {
+  $max: length($animate);
+  $animations: '';
+
+  @for $i from 1 through $max {
+    $animations: #{$animations + nth($animate, $i)};
+
+    @if $i < $max {
+      $animations: #{$animations + ", "};
+    }
+  }
+  -webkit-animation: $animations;
+  -moz-animation: $animations;
+  -o-animation: $animations;
+  animation: $animations;
+}
+
+@mixin keyframes($animationName) {
+  @-webkit-keyframes #{$animationName} {
+    @content;
+  }
+  @-moz-keyframes #{$animationName} {
+    @content;
+  }
+  @-o-keyframes #{$animationName} {
+    @content;
+  }
+  @keyframes #{$animationName} {
+    @content;
+  }
+}
+
+$wormPink: #F1799C;
+$legColor: #212121;
+$birdBlue: #35AFC7;
+
+$wormWidth: 23px;
+$wormHeight: 230px;
+$wormLeft: 60px;
+$wormEyeWidth: $wormWidth / 2 + 2.5px;
+
+$bodyHeighFromGround: 80px;
+$eyeWidth: 45px;
+$footWidth: 40px;
+$birdWidth: 150px;
+$birdHeight: 180px;
+$birdLeft: 155px;
+
+$animationTime: 2s;
+
+@include keyframes(eye-close) {
+  0% {
+    border-radius: 50% 50% 50% 50%;
+  }
+  30% {
+    border-radius: 40% 40% 10% 20%;
+  }
+  65% {
+    border-radius: 40% 40% 10% 20%;
+  }
+  100% {
+    border-radius: 50% 50% 50% 50%;
+  }
+
+}
+
+@include keyframes(body-move) {
+  $tilt: 27;
+  $left: 25px;
+  $bodyRotate: 5;
+  $heightShift: 38px;
+  0% {
+    @include rotateXY(0, 0);
+    left: 0px;
+    bottom: $bodyHeighFromGround;
+
+    //@include skew(0, 0)
+    //@include rotateY(0);
+  }
+  30% {
+    @include rotateXY($tilt, $bodyRotate);
+    left: $left;
+    bottom: $bodyHeighFromGround + $heightShift;
+    //@include skew(0, -$bodyRotate)
+    //@include rotateY($bodyRotate);
+  }
+  40% {
+    @include rotateXY($tilt, -$bodyRotate);
+    left: $left;
+    bottom: $bodyHeighFromGround + $heightShift;
+    //@include skew(0, $bodyRotate)
+    //@include rotateY($bodyRotate);
+  }
+  50% {
+    @include rotateXY($tilt, $bodyRotate);
+    left: $left;
+    bottom: $bodyHeighFromGround + $heightShift;
+    //@include skew(0, -$bodyRotate)
+    //@include rotateY($bodyRotate);
+  }
+  60% {
+    @include rotateXY($tilt, -$bodyRotate);
+    left: $left;
+    bottom: $bodyHeighFromGround + $heightShift;
+    //@include skew(0, -$bodyRotate)
+    //@include rotateY($bodyRotate);
+  }
+  65% {
+    @include rotateXY($tilt, $bodyRotate);
+    left: $left;
+    bottom: $bodyHeighFromGround + $heightShift;
+    //@include skew(0, -$bodyRotate)
+    //@include rotateY($bodyRotate);
+  }
+
+  100% {
+    @include rotateXY(0, 0);
+    left: 0px;
+    bottom: $bodyHeighFromGround;
+    //@include skew(0, 0)
+    //@include rotateY(0);
+  }
+
+}
+
+@include keyframes(worm-stretch) {
+  $newHeight: 290px;
+  $wormTilt: 29;
+  0% {
+    height: $wormHeight;
+    @include rotate(20);
+    left: $wormLeft;
+  }
+  30% {
+    height: $newHeight;
+    @include rotate($wormTilt);
+    left: $wormLeft + 40px;
+  }
+  65% {
+    height: $newHeight;
+    @include rotate($wormTilt);
+    left: $wormLeft + 40px;
+  }
+  100% {
+    height: $wormHeight;
+    @include rotate(20);
+    left: $wormLeft;
+  }
+}
+
+@include keyframes(worm-eye) {
+
+  0% {
+    height: $wormEyeWidth;
+    border-radius: 50%;
+    top: -7px;
+  }
+  30% {
+    height: 4px;
+    border-radius: 0;
+    top: 0px;
+  }
+  65% {
+    height: 4px;
+    border-radius: 0;
+    top: 0px;
+  }
+  100% {
+    height: $wormEyeWidth;
+    border-radius: 50%;
+    top: -7px;
+  }
+}
+
+@include keyframes(legs-move) {
+  $legRotate: 25;
+  $legNewHeight: $bodyHeighFromGround + 20px;
+  $legLeft: 34px;
+  0% {
+    @include rotate(8);
+    left: 20px;
+    height: 80px;
+  }
+  30% {
+    @include rotate($legRotate);
+    left: $legLeft;
+    height: $legNewHeight;
+  }
+  65% {
+    @include rotate($legRotate);
+    left: $legLeft;
+    height: $legNewHeight;
+  }
+  100% {
+    @include rotate(8);
+    left: 20px;
+    height: 80px;
+  }
+}
+
+@include keyframes(tail-wiggle) {
+  $tailWiggle: -30;
+  0% {
+    //nothing
+    @include rotate(0);
+  }
+  30% {
+    //nothing
+    @include rotate($tailWiggle);
+  }
+  40% {
+    //nothing
+    @include rotate($tailWiggle + 10);
+  }
+  50% {
+    //nothing
+    @include rotate($tailWiggle - 10);
+  }
+  65% {
+    //nothing
+    @include rotate($tailWiggle);
+  }
+  100% {
+    //nothing
+    @include rotate(0);
+  }
+}
+
+.bird-box {
+  position: absolute;
+  width: 500px;
+  height: 300px;
+  top: 300px;
+  left: 50%;
+  margin-left: -250px;
+  overflow: hidden;
+
+  .worm {
+    width: $wormWidth;
+    height: $wormHeight;
+    position: absolute;
+    left: $wormLeft;
+    bottom: -25px;
+    background: $wormPink;
+    @include transform-origin($wormWidth/2 $wormHeight);
+    @include rotate(20);
+    border-radius: 0 30px/30px;
+
+    @include animation('worm-stretch ' + $animationTime + ' infinite');
+  }
+  .worm:before {
+    //Turn of Worm
+    content: "";
+    height: $wormWidth;
+    width: 70px;
+    left: -57px;
+    top: 2px;
+    position: absolute;
+    background: $wormPink;
+    border-radius: 30px/30px;
+    @include rotate(15);
+    @include transform-origin(70px $wormWidth/2);
+  }
+  .worm:after {
+    //Eye of Worm
+    content: "";
+    position: absolute;
+    left: -45px;
+    top: -7px;
+    background: $legColor;
+
+    height: $wormEyeWidth;
+    width: $wormEyeWidth;
+    border-radius: 50%;
+    @include rotate(14);
+    @include animation('worm-eye '+ $animationTime + ' infinite');
+  }
+
+  .bird {
+    position: absolute;
+    left: $birdLeft;
+    bottom: 0px;
+
+    .body {
+      position: absolute;
+      bottom: $bodyHeighFromGround;
+      height: $birdHeight;
+      width: $birdWidth;
+      background: $birdBlue;
+      border-radius: 45% 45% 0 0;
+      @include transform-origin(15px $birdHeight);
+      @include animation('body-move ' + $animationTime + ' infinite');
+
+    }
+    $squareWidth: 60px;
+    .body:after {
+      //Black Square
+      position: absolute;
+      left: 0px;
+      bottom: 0px;
+      background: $legColor;
+      width: $squareWidth;
+      height: $squareWidth;
+      content: "";
+    }
+    .body:before {
+      //Black Triangle
+      position: absolute;
+      left: $squareWidth - 1px;
+      bottom: 0px;
+      width: 0px;
+      height: 0px;
+
+      border-top: $squareWidth solid transparent;
+      border-left: ($birdWidth - $squareWidth) solid $legColor;
+
+      content: "";
+
+    }
+
+    .beak {
+      $beakWidth: 70px;
+      width: 0px;
+      height: 0px;
+      position: absolute;
+      bottom: 90px;
+      left: - $beakWidth + 28px;
+      border-top: $beakWidth + 5px solid transparent;
+      border-right: $beakWidth solid $legColor;
+    }
+
+    .eye {
+      width: $eyeWidth;
+      height: $eyeWidth;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 90px;
+      left: 60px;
+      background: $legColor;
+      @include animation('eye-close ' + $animationTime + ' infinite');
+    }
+    .tail {
+      $tailWidth: 70px;
+      $tailHeight: 60px;
+      width: 0px;
+      height: 0px;
+      position: absolute;
+      left: $birdWidth;
+      bottom: 0;
+      border-right: $tailWidth solid $birdBlue;
+      border-top: $tailHeight solid transparent;
+      @include transform-origin(0px $tailHeight);
+      @include animation('tail-wiggle ' + $animationTime + ' infinite');
+    }
+
+    .foot {
+      position: absolute;
+      bottom: 0px;
+      height: 6px;
+      background: $legColor;
+      width: $footWidth;
+      left: ($birdWidth / 3) - ($footWidth / 2);
+    }
+    .foot.foot2 {
+      left: ($birdWidth / 3) - ($footWidth / 2) + $footWidth - 5px;;
+    }
+
+    .foot:after {
+      //Legs
+      content: "";
+      position: absolute;
+      height: $bodyHeighFromGround;
+      width: 6px;
+      left: ($footWidth /2);
+      bottom: 0px;
+      background: $legColor;
+      @include rotate(8);
+      @include transform-origin(3px $bodyHeighFromGround);
+      @include animation('legs-move ' + $animationTime + ' infinite');
+    }
+  }
+
+}
+
+
+
+

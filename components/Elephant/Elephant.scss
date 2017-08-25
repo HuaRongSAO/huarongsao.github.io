@@ -1,0 +1,525 @@
+/*Movement*/
+$ele-bezier-animation: cubic-bezier(0.63, 0.15, 0.49, 0.93);
+
+/*Colors*/
+$main-color: #C2C2C2;
+$line-color: #808080;
+$eye-color: #FDFDFD;
+$fang-color: #FFF;
+$nail-color: #E0E0E0;
+$shadow-color: rgba(74, 74, 74, 0.53); //Set rgba for color opacity
+
+.ele-container {
+  background: linear-gradient(to bottom, rgba(0, 141, 210, 0.63) 0%, rgba(0, 0, 0, 0) 100%);
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.ele-wrapper {
+  animation: ele-movement 1s infinite linear;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate3D(-50%, -75%, 0);
+  width: 200px;
+}
+
+.ele-body {
+  animation: body-movement 1s infinite $ele-bezier-animation;
+  background: linear-gradient(to bottom, lighten($main-color, 5%) 0%, darken($main-color, 15%) 70%);
+  border: 1px solid $line-color;
+  border-radius: 100px 50px 70px 60px;
+  height: 165px;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.ele-tail {
+  animation: tail-movement 1s infinite $ele-bezier-animation;
+  border-top: 7px solid $line-color;
+  border-radius: 50%;
+  height: 50px;
+  position: absolute;
+  transform: translate3d(-3%, 69%, 0) rotateZ(-20deg);
+  width: 64px;
+
+  &:before {
+    border-top: 5px solid $main-color;
+    border-radius: 50%;
+    content: '';
+    height: 50px;
+    position: absolute;
+    width: 64px;
+    top: -6px;
+  }
+}
+
+.ele-head {
+  animation: head-movement 2s infinite linear;
+  background: $main-color;
+  border-radius: 50%;
+  border-top: 1px solid $line-color;
+  box-shadow: -1px 1px 2px $line-color;
+  height: 150px;
+  position: absolute;
+  transform: translate3d(80%, -25%, 0);
+  width: 155px;
+}
+
+%ele-eye {
+  animation: eyes-blink 3.5s infinite linear;
+  background-color: $eye-color;
+  border-radius: 50%;
+  bottom: -48px;
+  content: '';
+  height: 10px;
+  position: absolute;
+  width: 10px;
+}
+
+.ele-eyebrows {
+  animation: eyebrows-movement 1s infinite $ele-bezier-animation;
+  background: linear-gradient(to top, $main-color 20%, darken($main-color, 15%) 100%);
+  border-radius: 10px;
+  border-top: 1px solid $line-color;
+  bottom: 88px;
+  height: 20px;
+  left: 92px;
+  position: absolute;
+  width: 60px;
+}
+
+.ele-eyes {
+  left: 60%;
+  position: absolute;
+  top: 6%;
+
+  &:before {
+    @extend %ele-eye;
+
+    left: 41px;
+  }
+
+  &:after {
+    @extend %ele-eye;
+
+    left: 10px;
+  }
+
+}
+
+.ele-ear {
+  animation: ear-movement 1s infinite linear;
+  background: linear-gradient(to left, $main-color 10%, darken($main-color, 10%) 100%);
+  border-bottom: 1px solid $line-color;
+  border-left: 1px solid $line-color;
+  border-top: 1px solid $line-color;
+  border-radius: 60px 0 0 50%;
+  height: 110px;
+  left: -22px;
+  position: absolute;
+  top: 25px;
+  transform: rotateZ(-10deg);
+  width: 60px;
+}
+
+.ele-mouth {
+  animation: mouth-movement 1s infinite linear;
+  background: linear-gradient(to bottom, $main-color 50%, darken($main-color, 10%) 100%);
+  border-radius: 0px 100% 0px 0px;
+  border-top: 2px solid $line-color;
+  height: 160px;
+  left: 83%;
+  position: absolute;
+  top: 35%;
+  width: 30px;
+
+  &:before {
+    animation: mouth-after-movement 1s infinite linear;
+    background-color: darken($main-color, 10%);
+    border-bottom: 1px solid $line-color;
+    border-left: 1px solid $line-color;
+    border-radius: 8px;
+    bottom: 0;
+    content: '';
+    height: 15px;
+    left: -5px;
+    position: absolute;
+    width: 40px;
+  }
+}
+
+%ele-fang {
+  border-bottom: 12px solid $fang-color;
+  border-radius: 50%;
+  height: 40px;
+  position: absolute;
+  transform: rotateZ(20deg);
+  width: 50px;
+}
+
+.ele-fang-front {
+  @extend %ele-fang;
+  box-shadow: 0px 1px 0px $line-color;
+  left: 100px;
+  top: 100px;
+
+  &:before {
+    background-color: $main-color;
+    bottom: -10px;
+    content: '';
+    height: 45px;
+    left: -5px;
+    position: absolute;
+    width: 15px;
+  }
+
+  &:after {
+    background-color: $main-color;
+    border-radius: 0 50% 50% 0;
+    bottom: -14px;
+    box-shadow: 1px 1px 0px $line-color;
+    content: '';
+    height: 21px;
+    left: 6px;
+    position: absolute;
+    transform: rotateZ(20deg);
+    width: 15px;
+  }
+}
+
+.ele-fang-back {
+  @extend %ele-fang;
+
+  border-bottom-color: darken($fang-color, 10%);
+  left: 115px;
+  top: 95px;
+  z-index: -1;
+
+  &:before {
+    background-color: $main-color;
+    bottom: -10px;
+    content: '';
+    height: 25px;
+    position: absolute;
+    width: 30px;
+  }
+}
+
+div[class^="ele-leg-"] {
+  border-left: 1px solid $line-color;
+  height: 88px;
+  position: absolute;
+  width: 50px;
+
+  &:before {
+    background-color: $shadow-color;
+    border-radius: 50%;
+    bottom: -30px;
+    box-shadow: 0 0 2px $shadow-color;
+    content: '';
+    height: 10px;
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%) rotateZ(0deg);
+    width: 50px;
+  }
+}
+
+.ele-leg-front {
+  background-color: darken($main-color, 15%);
+  top: 100%;
+  z-index: 1;
+
+  .ele-foot {
+    background-color: darken($main-color, 15%);
+  }
+}
+
+.ele-leg-back {
+  background-color: darken($main-color, 25%);
+  top: 95%;
+
+  .ele-foot {
+    background-color: darken($main-color, 25%);
+
+    &:before, &:after {
+      background-color: darken($nail-color, 15%);
+    }
+  }
+}
+
+.ele-leg-1 {
+  animation: leg-animation 2s infinite $ele-bezier-animation 0s;
+  right: 57.5%;
+
+  &:before {
+    animation: foot-shadow-animation 2s infinite $ele-bezier-animation 0s;
+  }
+
+  .ele-foot {
+    animation: foot-animation 2s infinite $ele-bezier-animation 0s;
+  }
+}
+
+.ele-leg-2 {
+  animation: leg-animation 2s infinite $ele-bezier-animation -1s;
+  right: 67.5%;
+
+  &:before {
+    animation: foot-shadow-animation 2s infinite $ele-bezier-animation -1s;
+  }
+
+  .ele-foot {
+    animation: foot-animation 2s infinite $ele-bezier-animation -1s;
+  }
+}
+
+.ele-leg-3 {
+  animation: leg-animation 2s infinite $ele-bezier-animation -1s;
+  right: 5%;
+
+  &:before {
+    animation: foot-shadow-animation 2s infinite $ele-bezier-animation -1s;
+  }
+
+  .ele-foot {
+    animation: foot-animation 2s infinite $ele-bezier-animation -1s;
+  }
+}
+
+.ele-leg-4 {
+  animation: leg-animation 2s infinite $ele-bezier-animation 0s;
+  right: 15%;
+
+  &:before {
+    animation: foot-shadow-animation 2s infinite $ele-bezier-animation 0s;
+  }
+
+  .ele-foot {
+    animation: foot-animation 2s infinite $ele-bezier-animation 0s;
+  }
+}
+
+%ele-nail {
+  background-color: $nail-color;
+  border-radius: 10px 10px 0 0;
+  bottom: 0;
+  content: '';
+  height: 15px;
+  position: absolute;
+  width: 11px;
+}
+
+.ele-foot {
+  border-radius: 25px 25px 35% 40%;
+  bottom: -17.5px;
+  box-shadow: -1px 1px 0px $line-color;
+  height: 35px;
+  left: 50%;
+  overflow: hidden;
+  position: absolute;
+  transform: translateX(-49%) rotateZ(0deg);
+  width: 55px;
+
+  &:before {
+    @extend %ele-nail;
+
+    right: -7.5px;
+  }
+
+  &:after {
+    @extend %ele-nail;
+
+    bottom: -3px;
+    right: 5px;
+  }
+}
+
+@keyframes leg-animation {
+  0% {
+    height: 65px;
+    transform: translate3d(0, -90%, 0) rotate3d(0, 0, 1, 10deg) translate3d(0, 30%, 0);
+  }
+  25% {
+    height: 40px;
+  }
+  50% {
+    height: 65px;
+    transform: translate3d(0, -90%, 0) rotate3d(0, 0, 1, -15deg) translate3d(0, 30%, 0);
+  }
+  75% {
+    height: 65px;
+  }
+  100% {
+    height: 65px;
+    transform: translate3d(0, -90%, 0) rotate3d(0, 0, 1, 10deg) translate3d(0, 30%, 0);
+  }
+}
+
+@keyframes foot-animation {
+  0% {
+    transform: translateX(-49%) rotateZ(-10deg);
+  }
+  15% {
+    transform: translateX(-49%) rotateZ(5deg);
+  }
+  40% {
+    transform: translateX(-49%) rotateZ(0deg);
+  }
+  50% {
+    transform: translateX(-49%) rotateZ(15deg);
+  }
+  100% {
+    transform: translateX(-49%) rotateZ(-10deg);
+  }
+}
+
+@keyframes foot-shadow-animation {
+  0% {
+    transform: translateX(-50%) rotateZ(-8deg);
+    bottom: -20px;
+    width: 50px;
+  }
+  25% {
+    bottom: -30px;
+    width: 40px;
+  }
+  50% {
+    transform: translateX(-50%) rotateZ(13deg);
+    bottom: -20px;
+    width: 50px;
+  }
+  100% {
+    transform: translateX(-50%) rotateZ(-8deg);
+    bottom: -20px;
+    width: 50px;
+  }
+}
+
+@keyframes eyes-blink {
+  0% {
+    height: 10px
+  }
+  3% {
+    height: 1px
+  }
+  5% {
+    height: 10px
+  }
+  100% {
+    height: 10px
+  }
+}
+
+@keyframes ele-movement {
+  0% {
+    transform: translate3D(-50%, -54%, 0)
+  }
+  50% {
+    transform: translate3D(-50%, -57%, 0)
+  }
+  100% {
+    transform: translate3D(-50%, -54%, 0)
+  }
+}
+
+@keyframes mouth-movement {
+  0% {
+    height: 160px;
+    width: 28px;
+  }
+  50% {
+    height: 150px;
+    width: 30px;
+  }
+  100% {
+    height: 160px;
+    width: 28px;
+  }
+}
+
+@keyframes mouth-after-movement {
+  0% {
+    width: 37px;
+  }
+  50% {
+    width: 40px;
+  }
+  100% {
+    width: 37px;
+  }
+}
+
+@keyframes tail-movement {
+  0% {
+    transform: translate3d(-3%, 69%, 0) rotateZ(-20deg);
+  }
+  50% {
+    transform: translate3d(-5%, 65%, 0) rotateZ(-18deg);
+  }
+  100% {
+    transform: translate3d(-3%, 69%, 0) rotateZ(-20deg);
+  }
+}
+
+@keyframes head-movement {
+  0% {
+    transform: translate3d(80%, -22%, 0) rotateZ(3deg);
+  }
+  25% {
+    transform: translate3d(80%, -22.5%, 0) rotateZ(0deg);
+  }
+  50% {
+    transform: translate3d(80%, -23%, 0) rotateZ(-3deg);
+  }
+  75% {
+    transform: translate3d(80%, -22.5%, 0) rotateZ(0deg);
+  }
+  100% {
+    transform: translate3d(80%, -22%, 0) rotateZ(3deg);
+  }
+
+}
+
+@keyframes body-movement {
+  0% {
+    height: 160px;
+    margin-top: 5px;
+  }
+  50% {
+    height: 162.5px;
+    margin-top: 2.5px;
+  }
+  100% {
+    height: 160px;
+    margin-top: 5px;
+  }
+}
+
+@keyframes ear-movement {
+  0% {
+    height: 115px;
+  }
+  50% {
+    height: 110px;
+  }
+  100% {
+    height: 115px;
+  }
+}
+
+@keyframes eyebrows-movement {
+  0% {
+    height: 18px;
+  }
+  50% {
+    height: 20px;
+  }
+  100% {
+    height: 18px;
+  }
+}

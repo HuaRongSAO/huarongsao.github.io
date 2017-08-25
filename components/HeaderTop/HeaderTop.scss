@@ -1,0 +1,58 @@
+.header {
+  position: fixed;
+  top: 0;
+  display: flex;
+  border-radius: 0;
+  z-index: 99;
+  box-shadow: 1px 1px 2px #eee;
+  width: 100%;
+  max-width: 1920px;
+  min-width: 1024px;
+  font-weight: 700;
+  background-color: hsla(0, 0%, 100%, .97);
+  height: 60px;
+  line-height: 60px;
+
+  a {
+    display: block;
+    height: 100%;
+    color: #333;
+    text-decoration: none;
+    &:hover {
+      color: #3b8070;
+    }
+  }
+
+  &__left {
+    width: 150px;
+    text-align: center;
+    i {
+      font-size: 30px;
+      line-height: normal;
+    }
+  }
+  &__mid {
+    width: 700px;
+    display: flex;
+    a {
+      padding: 0 30px;
+      text-align: center;
+      &:hover, &.nuxt-link-exact-active {
+        background: #3b8070;
+        color: #fff;
+      }
+    }
+  }
+  &__right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    a {
+      display: block;
+      width: 120px;
+      &:hover {
+        color: #fa8072;
+      }
+    }
+  }
+}
