@@ -1,0 +1,41 @@
+{
+  "name": "works",
+  "version": "1.0.0",
+  "description": "Nuxt.js project",
+  "author": "HuaRongSAO <1114282509@qq.com>",
+  "private": true,
+  "scripts": {
+    "copy": "cp-file README.md dist/README.md ",
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate && npm run copy",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "deploy": "npm run generate && push-dir --dir=dist --branch=master --cleanup",
+    "precommit": "npm run lint"
+  },
+  "dependencies": {
+    "axios": "^0.16.2",
+    "nuxt": "^1.0.0-rc3",
+    "vue-loading-template": "^0.1.7",
+    "vue-tabs-component": "^1.1.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "css-loader": "^0.28.5",
+    "eslint": "^4.3.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-html": "^3.1.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "file-loader": "^0.11.2",
+    "font-awesome-webpack": "0.0.5-beta.2",
+    "node-sass": "^4.5.3",
+    "normalize.css": "^7.0.0",
+    "push-dir": "^0.4.1",
+    "sass-loader": "^6.0.6"
+  }
+}
