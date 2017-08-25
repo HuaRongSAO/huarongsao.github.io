@@ -5,13 +5,15 @@
   "author": "HuaRongSAO <1114282509@qq.com>",
   "private": true,
   "scripts": {
+    "del": "git branch -r -d origin/master && git push origin :master",
+    "push": "push-dir --dir=dist --branch=master --cleanup --allow-unclean",
     "copy": "cp-file README.md dist/README.md ",
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate && npm run copy",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "deploy": "npm run generate && push-dir --dir=dist --branch=master --cleanup",
+    "deploy": "npm run generate  && push-dir --dir=dist --branch=master --cleanup --allow-unclean",
     "precommit": "npm run lint"
   },
   "dependencies": {

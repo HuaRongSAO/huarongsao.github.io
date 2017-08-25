@@ -29,5 +29,24 @@ $ npm start
 # generate static project
 $ npm run generate
 ```
+# 指令
+```json
+{
+    "del": "git branch -r -d origin/master && git push origin :master",
+    //删除 master分之
+    "push": "push-dir --dir=dist --branch=master --cleanup --allow-unclean",
+    // 推送dist到master分之并强行覆盖
+    "copy": "cp-file README.md dist/README.md ",
+    //复制 README.md 到dist
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate && npm run copy",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "deploy": "npm run generate  && push-dir --dir=dist --branch=master --cleanup --allow-unclean",
+    //编译成ssr文件并且 推送dist到master分之并强行覆盖    
+    "precommit": "npm run lint"
+}
+```
 ## nuxt.js 如何部署到GitHub Page:
 [链接](https://zh.nuxtjs.org/faq/github-pages)
