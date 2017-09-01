@@ -9,7 +9,7 @@
           </div>
           <h1>陈华荣</h1>
           <p>{{ user.login }}</p>
-          <p>个人网站: chenhuarong.top</p>
+          <p>个人网站: http://117.78.33.86</p>
           <p>Email: 1114282509@qq.com</p>
           <p>Github: <a :href="user.html_url">{{ user.html_url }}</a></p>
           <p>微博: weibo.com/chenhuarongsao</p>

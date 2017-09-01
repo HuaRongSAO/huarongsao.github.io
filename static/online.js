@@ -18,5 +18,10 @@ export const online = [
     name: '奇迹优品 移动端',
     html_url: 'http://www.qijiyoupin.cn/mobile',
     description: '奇迹优品是集全新商品回收及商品销售为一体的垂直电商平台。回收类别包括手机、电脑、笔记本和相机等网站展示销售的数码产品。',
+  },
+  {
+    name: '外包项目1 ',
+    html_url: 'http://114.115.139.115:5002/',
+    description: '基于weui和webpack，flexlib的移动项目',
   }
 ]
