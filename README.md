@@ -38,7 +38,7 @@ $ npm run generate
     // 推送dist到master分之并强行覆盖
     "copy": "cp-file README.md dist/README.md ",
     //复制 README.md 到dist
-    "dev": "nuxt",
+    "dev": "nuxt",  
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate && npm run copy",
